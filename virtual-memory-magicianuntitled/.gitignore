@@ -1,0 +1,44 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+*.iws
+*.ipr
+
+# Java class files
+*.class
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Maven / Gradle (if used)
+target/
+build/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# Kotlin
+.kotlin/
+
+# Ignore local environment files
+.env
