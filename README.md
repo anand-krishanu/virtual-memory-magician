@@ -158,16 +158,6 @@ This simulator helps understand:
 - The trade-off between memory size and page faults
 - The importance of locality of reference in program execution
 
-## 🛠️ Future Enhancements
-
-Potential improvements:
-- [ ] Additional replacement algorithms (LRU, Optimal, Clock)
-- [ ] Configurable memory size via GUI
-- [ ] Visual animation of page replacement
-- [ ] Reference string input from file
-- [ ] Comparison mode for multiple algorithms
-- [ ] Working set visualization
-- [ ] TLB (Translation Lookaside Buffer) simulation
 
 ## 📝 License
 
