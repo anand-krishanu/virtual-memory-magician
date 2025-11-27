@@ -10,7 +10,7 @@ public class FIFOReplacement implements ReplacementPolicy {
 
     @Override
     public int chooseVictimFrame() {
-        return queue.poll(); // remove the oldest frame
+        return queue.poll();
     }
 
     @Override

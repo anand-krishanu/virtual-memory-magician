@@ -10,10 +10,12 @@ public class VirtualMemorySimulatorUI extends JFrame {
     private JTextField pageInput;
     private MemoryManager memoryManager;
     private int[] accessSequence = {1,2,3,2,4,1,5,2,1};
+    private JRadioButton fifoRadio;
+    private JRadioButton lruRadio;
 
     public VirtualMemorySimulatorUI() {
         setTitle("Virtual Memory Simulator");
-        setSize(650, 500);
+        setSize(700, 550);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -35,6 +37,18 @@ public class VirtualMemorySimulatorUI extends JFrame {
         tableScroll.setBorder(new TitledBorder("Frame Table"));
         add(tableScroll, BorderLayout.EAST);
 
+        // Top panel for algorithm selection
+        JPanel topPanel = new JPanel();
+        topPanel.setBorder(new TitledBorder("Page Replacement Algorithm"));
+        fifoRadio = new JRadioButton("FIFO (First-In-First-Out)", true);
+        lruRadio = new JRadioButton("LRU (Least Recently Used)");
+        ButtonGroup algorithmGroup = new ButtonGroup();
+        algorithmGroup.add(fifoRadio);
+        algorithmGroup.add(lruRadio);
+        topPanel.add(fifoRadio);
+        topPanel.add(lruRadio);
+        add(topPanel, BorderLayout.NORTH);
+
         // Controls
         JPanel controlPanel = new JPanel();
         JButton nextBtn = new JButton("Next Access");
@@ -50,7 +64,7 @@ public class VirtualMemorySimulatorUI extends JFrame {
         controlPanel.add(resetBtn);
         add(controlPanel, BorderLayout.SOUTH);
 
-        // Initialize MemoryManager
+        // Initialize MemoryManager with FIFO as default
         memoryManager = new MemoryManager(10, 3, new FIFOReplacement(), logArea, frameTable);
 
         final int[] accessIndex = {0};
@@ -84,9 +98,43 @@ public class VirtualMemorySimulatorUI extends JFrame {
 
         // Reset button
         resetBtn.addActionListener(e -> {
-            dispose();
-            new VirtualMemorySimulatorUI().setVisible(true);
+            logArea.setText("");
+            accessIndex[0] = 0;
+            pageInput.setText("");
+            
+            // Recreate memory manager with selected algorithm
+            ReplacementPolicy policy = fifoRadio.isSelected() ? 
+                new FIFOReplacement() : new LRUReplacement();
+            memoryManager = new MemoryManager(10, 3, policy, logArea, frameTable);
+            
+            logArea.append("System reset with " + 
+                (fifoRadio.isSelected() ? "FIFO" : "LRU") + " algorithm\n");
         });
+        
+        // Add listeners to radio buttons to require reset
+        fifoRadio.addActionListener(e -> {
+            if (memoryManager.hasActivity()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Click Reset to apply the new algorithm", 
+                    "Algorithm Changed", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        
+        lruRadio.addActionListener(e -> {
+            if (memoryManager.hasActivity()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Click Reset to apply the new algorithm", 
+                    "Algorithm Changed", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        
+        // Initial message
+        logArea.append("Virtual Memory Simulator Ready\n");
+        logArea.append("Algorithm: FIFO (First-In-First-Out)\n");
+        logArea.append("Pages: 10 | Frames: 3\n");
+        logArea.append("Default sequence: [1,2,3,2,4,1,5,2,1]\n\n");
     }
 
     public static void main(String[] args) {

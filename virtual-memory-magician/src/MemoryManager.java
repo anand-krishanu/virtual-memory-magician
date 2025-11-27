@@ -93,4 +93,8 @@ public class MemoryManager {
         double rate = (faults * 100.0) / (hits + faults);
         log(String.format("Fault Rate: %.2f%%", rate));
     }
+    
+    public boolean hasActivity() {
+        return (hits + faults) > 0;
+    }
 }
