@@ -3,7 +3,6 @@
 A Java-based **Virtual Memory Simulator** with a graphical user interface that demonstrates how operating systems manage virtual memory, page loading, and page replacement using the FIFO (First-In-First-Out) algorithm.
 
 ![Virtual Memory Simulator UI](screenshot.png)
-> *Add your screenshot as `screenshot.png` in the root directory*
 
 ## 📋 Overview
 
@@ -158,16 +157,6 @@ This simulator helps understand:
 - The trade-off between memory size and page faults
 - The importance of locality of reference in program execution
 
-## 🛠️ Future Enhancements
-
-Potential improvements:
-- [ ] Additional replacement algorithms (LRU, Optimal, Clock)
-- [ ] Configurable memory size via GUI
-- [ ] Visual animation of page replacement
-- [ ] Reference string input from file
-- [ ] Comparison mode for multiple algorithms
-- [ ] Working set visualization
-- [ ] TLB (Translation Lookaside Buffer) simulation
 
 ## 📝 License
 
